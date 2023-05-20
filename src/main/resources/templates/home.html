@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>McFly Company Home Page</title>
@@ -7,9 +7,13 @@
 <body>
 <h2>McFly Company Home Page</h2>
 <hr>
-<p>
-    Welcome to the McFly company home page!
-</p>
+<p>Welcome to the McFly company home page!</p>
+<hr>
+<p>User: <span sec:authentication="principal.username"></span></p>
+<br>
+<br>
+<p>Role(s): <span sec:authentication="principal.authorities"></span> </p>
+<hr>
 <form action="#" th:action="@{/logout}" method="POST">
     <input type="submit" value="Logout">
 </form>
