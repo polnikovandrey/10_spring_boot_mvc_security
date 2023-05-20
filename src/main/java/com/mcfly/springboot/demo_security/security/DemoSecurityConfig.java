@@ -39,7 +39,11 @@ public class DemoSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry
-                        -> authorizationManagerRequestMatcherRegistry.anyRequest().authenticated())
+                        -> authorizationManagerRequestMatcherRegistry
+                        .requestMatchers("/").hasRole("EMPLOYEE")
+                        .requestMatchers("/leaders/**").hasRole("MANAGER")
+                        .requestMatchers("/systems/**").hasRole("ADMIN")
+                        .anyRequest().authenticated())
                 .formLogin(formLoginConfigurer ->
                         formLoginConfigurer
                                 .loginPage("/showLoginPage")
